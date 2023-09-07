@@ -33,7 +33,7 @@ class MyApp extends StatelessWidget {
         // tested with just a hot reload.
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
-        scaffoldBackgroundColor: const Color(0xFF32383e),
+        //scaffoldBackgroundColor: const Color(0xFF32383e),
       ),
       debugShowCheckedModeBanner: false,
       home: const NowPlayingScreen(),
