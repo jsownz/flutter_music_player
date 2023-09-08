@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class DarkButton extends StatelessWidget {
   final IconData icon;
-  final Function onTap;
+  final VoidCallback onTap;
   const DarkButton({
     super.key,
     required this.icon,
@@ -12,7 +12,7 @@ class DarkButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: onTap(),
+      onTap: onTap,
       borderRadius: BorderRadius.circular(100),
       child: Container(
         padding: const EdgeInsets.all(15),

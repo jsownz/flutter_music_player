@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_music_player/components/dark_button.dart';
+import 'package:flutter_music_player/components/medium_dark_button.dart';
 import 'package:flutter_music_player/components/now_playing_avatar.dart';
+import 'package:flutter_music_player/components/play_button.dart';
 import 'package:flutter_music_player/constants.dart';
+import 'package:audioplayers/audioplayers.dart';
 
 class NowPlayingScreen extends StatefulWidget {
   const NowPlayingScreen({super.key});
@@ -12,6 +15,46 @@ class NowPlayingScreen extends StatefulWidget {
 }
 
 class _NowPlayingScreenState extends State<NowPlayingScreen> {
+  bool isPlaying = false;
+  final player = AudioPlayer();
+  Duration duration = Duration.zero;
+  Duration position = Duration.zero;
+
+  void setPlayerSource() async {
+    await player.setSource(AssetSource('music/Wanted(chosic.com).mp3'));
+  }
+
+  void resumePlayer() async {
+    await player.resume();
+  }
+
+  void pausePlayer() async {
+    await player.pause();
+  }
+
+  @override
+  void initState() {
+    player.onPlayerStateChanged.listen((state) {
+      setState(() {
+        isPlaying = state == PlayerState.playing;
+      });
+    });
+
+    player.onDurationChanged.listen((newDuration) {
+      setState(() {
+        duration = newDuration;
+      });
+    });
+
+    player.onPositionChanged.listen((newPosition) {
+      setState(() {
+        position = newPosition;
+      });
+    });
+    setPlayerSource();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return AnnotatedRegion<SystemUiOverlayStyle>(
@@ -63,29 +106,50 @@ class _NowPlayingScreenState extends State<NowPlayingScreen> {
                   Text("Low Life", style: kNowPlayingTitle),
                   Text("Future ft. The Weeknd", style: kNowPlayingArtist),
                   const SizedBox(
-                    height: 40,
+                    height: 20,
                   ),
-                  Container(
-                    height: 50,
-                    color: Colors.blue,
+                  Slider(
+                    min: 0,
+                    max: duration.inSeconds.toDouble(),
+                    value: position.inSeconds.toDouble(),
+                    onChanged: (value) {
+                      final position = Duration(seconds: value.toInt());
+                      player.seek(position);
+                      player.resume();
+                    },
+                    activeColor: const Color(0xffa6871d),
+                    inactiveColor: const Color(0xff111516),
+                    thumbColor: kLightGrayBackground,
                   ),
                   const SizedBox(
-                    height: 40,
+                    height: 20,
                   ),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 20),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        DarkButton(
+                        MediumDarkButton(
                           icon: Icons.fast_rewind,
                           onTap: () {},
                         ),
-                        DarkButton(
-                          icon: Icons.play_arrow,
-                          onTap: () {},
+                        PlayButton(
+                          icon: isPlaying ? Icons.pause : Icons.play_arrow,
+                          onTap: () {
+                            if (isPlaying) {
+                              pausePlayer();
+                              setState(() {
+                                isPlaying = false;
+                              });
+                            } else {
+                              resumePlayer();
+                              setState(() {
+                                isPlaying = true;
+                              });
+                            }
+                          },
                         ),
-                        DarkButton(
+                        MediumDarkButton(
                           icon: Icons.fast_forward,
                           onTap: () {},
                         ),

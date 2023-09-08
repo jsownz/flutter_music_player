@@ -46,3 +46,4 @@ app.*.map.json
 .vscode/*
 
 google_fonts/*.ttf
+assets/music/*.mp3
