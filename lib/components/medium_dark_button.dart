@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_music_player/constants.dart';
 
 class MediumDarkButton extends StatelessWidget {
   final IconData icon;
