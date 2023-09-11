@@ -106,7 +106,23 @@ class _NowPlayingScreenState extends State<NowPlayingScreen> {
                   Text("Low Life", style: kNowPlayingTitle),
                   Text("Future ft. The Weeknd", style: kNowPlayingArtist),
                   const SizedBox(
-                    height: 20,
+                    height: 10,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 23),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          "${position.inMinutes.toString().padLeft(2, '0')}:${(position.inSeconds % 60).toString().padLeft(2, '0')}",
+                          style: kTextLabel.copyWith(fontSize: 12),
+                        ),
+                        Text(
+                          "${duration.inMinutes.toString().padLeft(2, '0')}:${(duration.inSeconds % 60).toString().padLeft(2, '0')}",
+                          style: kTextLabel.copyWith(fontSize: 12),
+                        ),
+                      ],
+                    ),
                   ),
                   Slider(
                     min: 0,
@@ -122,7 +138,7 @@ class _NowPlayingScreenState extends State<NowPlayingScreen> {
                     thumbColor: kLightGrayBackground,
                   ),
                   const SizedBox(
-                    height: 20,
+                    height: 10,
                   ),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 20),
