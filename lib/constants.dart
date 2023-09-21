@@ -19,10 +19,25 @@ const TextStyle kTextLabel = TextStyle(
   color: kTextColor,
   fontFamily: 'Montserrat',
   fontWeight: FontWeight.bold,
+  fontSize: 14,
+);
+
+const TextStyle kSongTitle = TextStyle(
+  color: Color(0xffaaabab),
+  fontFamily: 'Montserrat',
+  fontWeight: FontWeight.bold,
+  fontSize: 14,
+);
+
+TextStyle kSongArtist = kSongTitle.copyWith(
+  color: kTextColor,
+  fontSize: 13,
+  fontWeight: FontWeight.w400,
 );
 
 TextStyle kNowPlayingTitle = kTextLabel.copyWith(
   fontSize: 30,
+  fontWeight: FontWeight.w500,
   color: const Color(0xffaaabab),
 );
 

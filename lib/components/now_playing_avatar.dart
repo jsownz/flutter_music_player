@@ -3,8 +3,12 @@ import 'package:flutter/material.dart';
 class NowPlayingAvatar extends StatefulWidget {
   final double avatarWidth;
   final double borderWidth;
-  const NowPlayingAvatar(
-      {super.key, this.avatarWidth = 325, this.borderWidth = 12});
+  late VoidCallback onTap;
+  NowPlayingAvatar(
+      {super.key,
+      this.avatarWidth = 325,
+      this.borderWidth = 12,
+      required this.onTap});
 
   @override
   State<NowPlayingAvatar> createState() => _NowPlayingAvatarState();
@@ -13,7 +17,10 @@ class NowPlayingAvatar extends StatefulWidget {
 class _NowPlayingAvatarState extends State<NowPlayingAvatar> {
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return AnimatedContainer(
+      duration: const Duration(milliseconds: 500),
+      width: widget.avatarWidth,
+      height: widget.avatarWidth,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(widget.avatarWidth),
         border: Border.all(
@@ -35,16 +42,19 @@ class _NowPlayingAvatarState extends State<NowPlayingAvatar> {
           ),
         ],
       ),
-      child: ClipRRect(
-        borderRadius: BorderRadius.all(
-          Radius.circular(widget.avatarWidth),
-        ),
-        child: Image(
-          alignment: Alignment.centerRight,
-          image: const AssetImage('assets/images/lava.jpg'),
-          fit: BoxFit.cover,
-          width: widget.avatarWidth,
-          height: widget.avatarWidth,
+      child: InkWell(
+        onTap: widget.onTap,
+        child: ClipRRect(
+          borderRadius: BorderRadius.all(
+            Radius.circular(widget.avatarWidth),
+          ),
+          child: const Image(
+            alignment: Alignment.centerRight,
+            image: AssetImage('assets/images/lava.jpg'),
+            fit: BoxFit.cover,
+            // width: widget.avatarWidth,
+            // height: widget.avatarWidth,
+          ),
         ),
       ),
     );

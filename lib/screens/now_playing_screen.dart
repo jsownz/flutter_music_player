@@ -6,6 +6,7 @@ import 'package:flutter_music_player/components/now_playing_avatar.dart';
 import 'package:flutter_music_player/components/play_button.dart';
 import 'package:flutter_music_player/constants.dart';
 import 'package:audioplayers/audioplayers.dart';
+import 'package:flutter_music_player/screens/playlist_screen.dart';
 
 class NowPlayingScreen extends StatefulWidget {
   const NowPlayingScreen({super.key});
@@ -83,7 +84,13 @@ class _NowPlayingScreenState extends State<NowPlayingScreen> {
                     children: [
                       DarkButton(
                         icon: Icons.west,
-                        onTap: () {},
+                        onTap: () {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) => const PlaylistScreen(),
+                            ),
+                          );
+                        },
                       ),
                       const Text(
                         "PLAYING NOW",
@@ -99,7 +106,13 @@ class _NowPlayingScreenState extends State<NowPlayingScreen> {
                   const SizedBox(
                     height: 50,
                   ),
-                  const NowPlayingAvatar(),
+                  NowPlayingAvatar(onTap: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => const PlaylistScreen(),
+                      ),
+                    );
+                  }),
                   const SizedBox(
                     height: 50,
                   ),

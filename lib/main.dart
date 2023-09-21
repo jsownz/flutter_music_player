@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_music_player/screens/now_playing_screen.dart';
 import 'package:flutter_music_player/screens/playlist_screen.dart';
 
 void main() {
@@ -19,7 +20,7 @@ class MyApp extends StatelessWidget {
         //scaffoldBackgroundColor: const Color(0xFF32383e),
       ),
       debugShowCheckedModeBanner: false,
-      home: const PlaylistScreen(),
+      home: const NowPlayingScreen(),
     );
   }
 }
